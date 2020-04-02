@@ -1,7 +1,6 @@
 package sellers;
 
 import eatables.*;
-import exceptions.NoMoreIceCreamException;
 import sorten.Flavor;
 import sorten.MagnumType;
 
@@ -38,12 +37,7 @@ public class IceCreamSalon implements IceCreamSeller {
 	}
 	
 	public String toString(){
-		return "Total profit is: "+this.totalProfit;
+		return "Total profit is: "+this.totalProfit+"€";
 	}
 
-	@Override
-	public NoMoreIceCreamException orderNoMoreIceCreamException() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

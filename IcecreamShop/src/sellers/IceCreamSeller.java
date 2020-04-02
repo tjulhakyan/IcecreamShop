@@ -9,10 +9,8 @@ public interface IceCreamSeller extends Profitable{
 	
 	Cone orderCone(Flavor[] flavor);
 	
-	IceRocket orderIceRocket();
+	IceRocket orderIceRocket() throws NoMoreIceCreamException;
 	
-	Magnum orderMagnum(MagnumType magnumType);
-
-	NoMoreIceCreamException orderNoMoreIceCreamException();
+	Magnum orderMagnum(MagnumType magnumType) throws NoMoreIceCreamException;
 
 }

@@ -4,7 +4,6 @@ import java.util.concurrent.TimeUnit;
 
 import eatables.*;
 import exceptions.NoMoreIceCreamException;
-import exceptions.Stock;
 import sorten.Flavor;
 import sorten.MagnumType;
 
@@ -53,63 +52,52 @@ public class IceCreamCar implements IceCreamSeller{
 	}
 	
 	public IceRocket orderIceRocket() {
-		IceRocket iceRocket;
-		if(0>=stock.getIceRockets()) {
+		IceRocket iceRocket=new IceRocket();
+		
+		try {
 			iceRocket=prepareIceRocket();
-		} else {
-			iceRocket=new IceRocket();
-			stock.setIceRockets(stock.getIceRockets()-1);
+		} catch (NoMoreIceCreamException e) {
+			System.out.println(e.getMessage());
 		}
+		
+		stock.setIceRockets(stock.getIceRockets()-1);
 		this.profit+=pricelist.getRocketPrice();
 		
 		return iceRocket;
 	}
 	
-	private IceRocket prepareIceRocket(){
+	private IceRocket prepareIceRocket() throws NoMoreIceCreamException{
+		
+		if(0>=stock.getIceRockets()) {
+			System.out.println("Sorry, but we don't have 'IceRocket'");
+			throw new NoMoreIceCreamException();
+		}
 
-		System.out.println("Sorry, but we don't have 'IceRocket'");
-		return null;
+		return new IceRocket();
 	}
 	
 	
 	
 	public Magnum orderMagnum(MagnumType magnumType) {
-		Magnum magnum;
-		System.out.println("++++ "+stock.getMagni()+" ******");
-		if(0>=stock.getMagni()) {
+		Magnum magnum=new Magnum(magnumType);
+		
+		try {
 			magnum=prepareMagnum(magnumType);
-		} else {
-			magnum=new Magnum(magnumType);
-			stock.setMagni(stock.getMagni()-1);
+		} catch (NoMoreIceCreamException e) {
+			System.out.println(e.getMessage());
 		}
+		
+		stock.setMagni(stock.getMagni()-1);
 		this.profit+=pricelist.getMagnumPrice(magnumType);
 		return magnum;
 	}
 	
-	private Magnum prepareMagnum(MagnumType magnumType){
-		System.out.println("Sorry, but we don't have 'Magnum'");
-		return null;
-	}
-	
-	
-	public NoMoreIceCreamException orderNoMoreIceCreamException() {
-		NoMoreIceCreamException noMoreIceCreamException=new NoMoreIceCreamException();
-		
-		if(0>=stock.getBalls()) {
-			System.out.println("Now you need to wait a bit to bring a new portion of ice cream.");
-			for (int i = 5; i >= 0; i--) {
-				System.out.println(i);
-				try {
-					TimeUnit.SECONDS.sleep(1);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			stock.setBalls(30);
+	private Magnum prepareMagnum(MagnumType magnumType) throws NoMoreIceCreamException{
+		if(0>=stock.getMagni()) {
+			System.out.println("Sorry, but we don't have 'Magnum'");
+			throw new NoMoreIceCreamException();
 		}
-		stock.setMagni(stock.getBalls()-1);
-		this.profit+=pricelist.getBallPrice();
-		return noMoreIceCreamException;
+		return new Magnum(magnumType);
 	}
 	
 	public double getProfit() {

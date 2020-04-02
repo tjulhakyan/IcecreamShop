@@ -1,12 +1,24 @@
 package exceptions;
 
-import eatables.Eatable;
+public class NoMoreIceCreamException extends Exception{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-public class NoMoreIceCreamException implements Eatable{
-	public NoMoreIceCreamException() {}
+	public NoMoreIceCreamException() {
+		super();
+	}
 	
-	@Override
-	public void eat() {
-		System.out.println("You ordered: 1 x NoMoreIceCreamException.");
+	public NoMoreIceCreamException(String message) {
+		super(message);
+	}
+	
+	public NoMoreIceCreamException(String message, Throwable couse){
+		super(message, couse);
+	}
+	
+	public NoMoreIceCreamException(Throwable couse){
+		super(couse);
 	}
 }

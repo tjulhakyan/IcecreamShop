@@ -1,4 +1,4 @@
-package exceptions;
+package sellers;
 
 public class Stock {
 	private int iceRockets;

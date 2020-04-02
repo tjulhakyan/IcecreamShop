@@ -1,10 +1,11 @@
 import eatables.*;
+import exceptions.NoMoreIceCreamException;
 import sellers.*;
 import sorten.*;
 
 public class IcecreamShopApp1 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NoMoreIceCreamException {
 		Flavor[] flavor = { Flavor.MOKKA, Flavor.CHOCOLATE, Flavor.LEMON, Flavor.STRAWBERRY };
 		
 		MagnumType magnumType = MagnumType.ALPINENUTS;
